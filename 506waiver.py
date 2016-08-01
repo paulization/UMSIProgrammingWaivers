@@ -15,10 +15,12 @@ import logging
 
 # For setting up your python programming environment, you may want to consult the installation chappter, starting at: https://www.programsinformationpeople.org/runestone/static/publicPIP/Installation/FirstSteps.html
 
-# This assignment requires some knowledge of all the chapters in the text *except* those titled, "Prediction and Classification", "Inheritance", "Pyglet", "The Facebook Graph API", "Recursion",  "Test Cases", and "Unix". Some hints are provided with specific problems about chapters you might want to consult.
+# This assignment requires some knowledge of all the chapters in the text *except* those titled, 
+# "Prediction and Classification", "Inheritance", "Pyglet", "The Facebook Graph API", "Recursion",  "Test Cases", and "Unix". Some hints are provided with specific problems about chapters you might want to consult.
 
 #
-# There is code at the bottom of the file that runs tests: once you complete your part of the code, as instructed, all those tests should pass. Don't change any of the tests! You don't even need to understand the python unit test framework in which they are written. You can just examine in the outputs that they generate in your terminal (command prompt) window.
+# There is code at the bottom of the file that runs tests: once you complete your part of the code, as instructed, all those tests should pass. Don't change any of the tests!
+# You don't even need to understand the python unit test framework in which they are written. You can just examine in the outputs that they generate in your terminal (command prompt) window.
 
 
 ###### END OF INTRODUCTION #######
@@ -40,6 +42,7 @@ class Photo():
 ## After you do that, my_photo.title should have the value "Photo1", my_photo.author should have the value "Ansel Adams" and my_photo.tags should have the value ['Nature', 'Mist', 'Mountain']).
 
 # HINT: if you just call the constructor for the Photo class appropriately, everything will be taken care of for you. You just have to figure out, from the definition of the class, what to pass to the constructor. Remember the examples of creating a class instance from the textbook!
+my_photo = Photo("Photo1", "Ansel Adams", ['Nature', 'Mist', 'Mountain'])
 
 
 # [PROBLEM 2]
@@ -58,10 +61,14 @@ f.close()
 # Your job is to fill in the __init__ method
 class Photo2():
     def __init__(self, photo_d):
-        "Fill in this method"
+        self.title = photo_d["photo"]["title"]["_content"]
+        self.author = photo_d["photo"]["owner]["username"]
+        self.tags = []
+        for t in photo_d["photos"]["tags"]["tag"]:
+            self.tags.append(t["_content"])
 
 # After you fill it in, try creating an instance by invoking Photo2(sample_d) and check to see if it has the values you expect for title, author, and tags.
-
+Photo2(sample_d)
 
 ### PART 2: FlickR Tag Recommender
 
